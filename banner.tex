@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes,calc,arrows,through,intersections}
+\begin{document}
+
+\begin{tikzpicture}[x=1mm, y=1mm]
+\clip[use as bounding box] (-100,-100) rectangle (100,100);
+\fill[name path=nero] (0,0) circle (100);
+\fill[name path=rosso, white] (0,-25) circle (55);
+\path[name path=verde] (0,-25) -- (33.4696305-180:100);
+\path[name path=verde'] (0,-25) -- (-33.4696305:100);
+\node (bottom-tip) at (0,-168) {};
+\draw[name intersections={of=rosso and verde}]
+  (intersection-1) coordinate (one);
+\draw[name intersections={of=rosso and verde'}]
+  (intersection-1) coordinate (one');
+
+\path[name path=tizio, green] (0,-100) circle (95);
+
+% \draw[blue] (bottom-tip) -- (one);
+% \draw[blue] (bottom-tip) -- (one');
+\fill[white] (bottom-tip) -- (one) -- (one') -- cycle;
+\fill[red] (0,-25) circle (40);
+
+\draw[name intersections={of=nero and tizio}]
+  (intersection-1) coordinate (zip)
+  (intersection-2) coordinate (zop);
+
+\fill[white] (zop) circle (10);
+\end{tikzpicture}
+\end{document}
