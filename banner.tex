@@ -4,28 +4,22 @@
 \begin{document}
 
 \begin{tikzpicture}[x=1mm, y=1mm]
+
+\definecolor{shima}{RGB}{189,2,39}
 \clip[use as bounding box] (-100,-100) rectangle (100,100);
-\fill[name path=nero] (0,0) circle (100);
-\fill[name path=rosso, white] (0,-25) circle (55);
-\path[name path=verde] (0,-25) -- (33.4696305-180:100);
-\path[name path=verde'] (0,-25) -- (-33.4696305:100);
+\fill[name path=enso] (0,0) circle (100);
+\fill[name path=hole, white] (0,-25) circle (55);
+\path[name path=perpl] (0,-25) -- +({180+atan(28.3333/68)}:100);
+\path[name path=perpr] (0,-25) -- +({-atan(28.3333/68)}:100);
 \node (bottom-tip) at (0,-168) {};
-\draw[name intersections={of=rosso and verde}]
-  (intersection-1) coordinate (one);
-\draw[name intersections={of=rosso and verde'}]
-  (intersection-1) coordinate (one');
-
-\path[name path=tizio, green] (0,-100) circle (95);
-
-% \draw[blue] (bottom-tip) -- (one);
-% \draw[blue] (bottom-tip) -- (one');
-\fill[white] (bottom-tip) -- (one) -- (one') -- cycle;
-\fill[red] (0,-25) circle (40);
-
-\draw[name intersections={of=nero and tizio}]
-  (intersection-1) coordinate (zip)
-  (intersection-2) coordinate (zop);
-
-\fill[white] (zop) circle (10);
+\draw[name intersections={of=hole and perpl}] (intersection-1) coordinate (tangl);
+\draw[name intersections={of=hole and perpr}] (intersection-1) coordinate (tangr);
+\path[name path=dentcircle, green] (0,-100) circle (95);
+\fill[white] (bottom-tip) -- (tangl) -- (tangr) -- cycle;
+\fill[shima]  (0,-25) circle (40);
+\draw[name intersections={of=enso and dentcircle}]
+  (intersection-1) coordinate (dentl)
+  (intersection-2) coordinate (dentr);
+\fill[white] (dentr) circle (10);
 \end{tikzpicture}
 \end{document}
